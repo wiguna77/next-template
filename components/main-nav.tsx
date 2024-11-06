@@ -1,41 +1,48 @@
-import * as React from "react"
-import Link from "next/link"
+"use client"
+import { useState } from 'react';
 
-import { NavItem } from "@/types/nav"
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { Icons } from "@/components/icons"
+export default function MainNav() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-interface MainNavProps {
-  items?: NavItem[]
-}
-
-export function MainNav({ items }: MainNavProps) {
   return (
-    <div className="flex gap-6 md:gap-10">
-      <Link href="/" className="flex items-center space-x-2">
-        <Icons.logo className="h-6 w-6" />
-        <span className="inline-block font-bold">{siteConfig.name}</span>
-      </Link>
-      {items?.length ? (
-        <nav className="flex gap-6">
-          {items?.map(
-            (item, index) =>
-              item.href && (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className={cn(
-                    "flex items-center text-sm font-medium text-muted-foreground",
-                    item.disabled && "cursor-not-allowed opacity-80"
-                  )}
-                >
-                  {item.title}
-                </Link>
-              )
-          )}
-        </nav>
-      ) : null}
-    </div>
-  )
+    <nav className="bg-gray-900 p-4 flex items-center justify-between">
+      {/* Logo / Home Link */}
+      <div className="text-white text-xl font-bold">
+        $PEOW
+      </div>
+
+      {/* Menu Links */}
+      <div className="hidden md:flex space-x-6">
+        <a href="#home" className="text-white hover:text-gray-300">HOME</a>
+        <a href="#buy" className="text-white hover:text-gray-300">BUY $PEOW</a>
+        <a href="#news" className="text-white hover:text-gray-300">NEWS</a>
+        <a href="#info" className="text-white hover:text-gray-300">INFO</a>
+        <a href="#community" className="text-white hover:text-gray-300">COMMUNITY</a>
+        <a href="#partnership" className="text-white hover:text-gray-300">PARTNERSHIP</a>
+      </div>
+
+      {/* Mobile Menu Button */}
+      <button
+        className="md:hidden text-white focus:outline-none"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        {/* Icon: you can use any icon component here */}
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M3 12h18M3 6h18M3 18h18" />
+        </svg>
+      </button>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-16 left-0 w-full bg-gray-800 shadow-lg p-4 space-y-4">
+          <a href="#home" className="block text-white hover:text-gray-300">HOME</a>
+          <a href="#buy" className="block text-white hover:text-gray-300">BUY $PEOW</a>
+          <a href="#news" className="block text-white hover:text-gray-300">NEWS</a>
+          <a href="#info" className="block text-white hover:text-gray-300">INFO</a>
+          <a href="#community" className="block text-white hover:text-gray-300">COMMUNITY</a>
+          <a href="#partnership" className="block text-white hover:text-gray-300">PARTNERSHIP</a>
+        </div>
+      )}
+    </nav>
+  );
 }

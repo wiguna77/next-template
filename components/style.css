@@ -1,0 +1,60 @@
+body {
+    cursor: url('../public/mouse/a.png') 10 10, default;
+  }
+button{
+    cursor: url('../public/mouse/b.png') 10 10, pointer;
+} 
+a {
+    cursor: url('../public/mouse/b.png') 10 10, pointer;
+}
+/* Style the scrollbar itself */
+::-webkit-scrollbar {
+    width: 12px; /* Adjust the width of the scrollbar */
+  }
+  
+  /* Style the scrollbar track (background) */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Light gray background */
+  }
+  
+  /* Style the scrollbar handle (thumb) */
+  ::-webkit-scrollbar-thumb {
+    background: #ff69b4; /* Pink color for the handle */
+    border-radius: 10px; /* Optional: rounded corners for the handle */
+  }
+  
+  /* Style the scrollbar handle on hover (darkens when hovered) */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff1493; /* Darker pink when hovered */
+  }
+@keyframes fadeInFromTop {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fade-in {
+    animation: fadeInFromTop 1s ease-out;
+  }
+  @keyframes fall {
+    0% {
+        top: 10%;
+        opacity: 1;
+    }
+    100% {
+        top: 110%;
+        opacity: 1;
+    }
+}
+
+.raining-emote {
+    position: absolute;
+    font-size: 2rem;
+    animation: fall linear infinite;
+    opacity: 0;
+}
