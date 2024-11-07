@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: "(prefers-color-scheme: dark)", color: "white" },
   ],
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/iconp.webp",
+    shortcut: "/iconp.webp",
+    apple: "/iconp.webp",
   },
 }
 

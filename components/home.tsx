@@ -27,11 +27,17 @@ export function HomeSection(){
         const interval = setInterval(generateEmote, 1000); // Generate emotes every 1 second
         return () => clearInterval(interval); // Cleanup interval on component unmount
     }, []);
+    const scrollToAbout = () => {
+        const aboutSection = document.getElementById('about-section');
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     return (
         <div
-            className="relative min-h-screen bg-cover bg-center flex items-center justify-center"
-            style={{ backgroundImage: `url('./background/background.jpg')` }}
+            className="relative min-h-screen bg-cover bg-center flex items-center justify-center overflow-hidden"
+            style={{ backgroundImage: `url('./background/background1.jpg')` }}
         >
             {/* Main Content */}
             <main className="flex flex-col items-center justify-center text-center text-white px-4 fade-in">
@@ -41,28 +47,28 @@ export function HomeSection(){
 
                 {/* Desktop Buttons */}
                 <div className="hidden md:flex space-x-4">
-                    <button className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-lg">BUY NOW</button>
-                    <button className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-lg">CHART 📊</button>
+                    <button className="bg-[#ff00ec] hover:bg-[#b43ab2] text-white font-bold py-2 px-6 rounded-lg">BUY NOW</button>
+                    <button className="bg-[#ff00ec] hover:bg-[#b43ab2] text-white font-bold py-2 px-6 rounded-lg">CHART 📊</button>
                 </div>
 
                 {/* Mobile Links - Visible on smaller screens */}
                 <div className="flex flex-col space-y-4 mt-6 md:hidden">
                     <h3 className="text-2xl font-bold underline">Useful Links:</h3>
                     <div className="grid grid-cols-2 gap-4 mt-6 md:hidden">
-                        <button className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
+                        <button className="bg-[#ff00ec] hover:bg-[#cc00ff] text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
                             Buy <span>💰</span>
                         </button>
-                        <button className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
+                        <button className="bg-[#ff00ec] hover:bg-[#b43ab2] text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
                             Chart <span>📊</span>
                         </button>
-                        <button className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
+                        <button className="bg-[#ff00ec] hover:bg-[#b43ab2] text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
                             Twitter <span>🐦</span>
                         </button>
-                        <button className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
+                        <button className="bg-[#ff00ec] hover:bg-[#b43ab2] text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
                             Telegram <span>📨</span>
                         </button>
                     </div>
-                    <button className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
+                    <button className="bg-[#ff00ec] hover:bg-[#b43ab2] text-white font-bold py-2 px-6 rounded-lg flex justify-between items-center">
                         Solscan <span>⛓️</span>
                     </button>
                 </div>
@@ -82,6 +88,10 @@ export function HomeSection(){
                     {emote.emote}
                 </span>
             ))}
+            {/* Scroll Down Indicator */}
+            <div className="scroll-indicator" onClick={scrollToAbout}>
+                <span className="arrow fire">&#x2193;</span>
+            </div>
         </div>
     );
 }

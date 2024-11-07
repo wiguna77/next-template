@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { HomeSection } from "@/components/home";
 import { AboutSection } from "@/components/about";
 import { RoadMap } from "@/components/roadmap";
+import { LastPage } from "@/components/lastpage";
 
 export default function IndexPage() {
   return (
@@ -12,6 +13,7 @@ export default function IndexPage() {
       <HomeSection />
       <AboutSection/>
       <RoadMap/>
+      <LastPage/>
     </div>
   );
 };

@@ -20,7 +20,7 @@ export function AboutSection() {
 
   return (
     <div
-      className="relative min-h-screen bg-cover bg-center flex items-center justify-center"
+      className="relative min-h-screen bg-cover bg-center flex items-center justify-center text-xl lg:text-3xl md:text:2xl" id='about-section'
       style={{ backgroundImage: `url('./background/background2.jpg')` }}
     >
       <div className="max-w-7xl mx-auto px-4 py-12">
@@ -32,7 +32,7 @@ export function AboutSection() {
           }`}
         >
           <h2 className="text-4xl font-bold mb-4 text-white">About Us</h2>
-          <p className="text-lg text-gray-300">
+          <p className="text-gray-300">
             Welcome to our platform! Here we share all the latest news, partnerships, and much more about our mission.
           </p>
         </section>
