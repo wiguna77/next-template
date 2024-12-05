@@ -8,7 +8,7 @@ export function LastPage() {
       {/* Main Section */}
       <section
         className="relative h-[90vh] bg-cover bg-center"
-        style={{ backgroundImage: 'url("/background/bg2.jpeg")' }} // Make sure the image path is correct
+        style={{ backgroundImage: 'url("/background/tembak.jpg")' }} // Make sure the image path is correct
       >
         <div className="flex items-center justify-center h-screen ">
             <div className="text-center text-white p-6 md:p-12 bg-black bg-opacity-50">
