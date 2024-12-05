@@ -25,7 +25,7 @@ export function RoadMap() {
   return (
     <div
       className="relative min-h-screen bg-cover bg-center flex items-center justify-center text-xl lg:text-3xl md:text:2xl"
-      style={{ backgroundImage: `url('./background/background3.jpg')` }}
+      style={{ backgroundImage: `url('./background/bg3.jpeg')` }}
     >
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* About Section */}

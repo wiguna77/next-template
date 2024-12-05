@@ -5,9 +5,47 @@ html{
   font-family: 'MyCustomFont';
   src: url('../public/font/HowToDoSomething-7pKl.ttf') format('truetype');
 }
+/* Pulsing Effect for Fullscreen Image */
+.pulsing-effect {
+  animation: pulse 2s infinite;
+  cursor: pointer;
+}
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.005);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Fade-in Effect */
+.fade-in2 {
+  animation: fadeIn2 1s ease-in-out;
+}
+
+@keyframes fadeIn2 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Preserve aspect ratio without cropping */
+}
 body {
-    cursor: url('../public/mouse/a.png') 10 10, default;
+    cursor: url('../public/mouse/ac.png') 2 2, default;
     font-family: 'MyCustomFont', sans-serif !important;
     overflow-x:hidden;
     color: white; /* Text color */
@@ -15,13 +53,16 @@ body {
 
   }
 button{
-    cursor: url('../public/mouse/b.png') 10 10, pointer;
+    cursor: url('../public/mouse/bc.png') 2 2, pointer;
 } 
 .fire{
-  cursor: url('../public/mouse/b.png') 10 10, pointer;
+  cursor: url('../public/mouse/bc.png') 2 2, pointer;
+}
+.firenot{
+  cursor: url('../public/mouse/ac.png') 2 2, pointer;
 }
 a {
-    cursor: url('../public/mouse/b.png') 10 10, pointer;
+    cursor: url('../public/mouse/bc.png') 2 2, pointer;
 }
 /* Style the scrollbar itself */
 ::-webkit-scrollbar {

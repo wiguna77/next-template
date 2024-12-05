@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from 'react';
 import './style.css';
+import { Switch } from './ui/switch';
+
 
 export function SiteHeader() {
   const [isLoading, setIsLoading] = useState(true);  // State for loading overlay
@@ -11,25 +13,41 @@ export function SiteHeader() {
   const [isCursorChanged, setIsCursorChanged] = useState(false);
   const [isFading, setIsFading] = useState(false);
 
+  // useEffect(() => {
+  //   // Disable scrolling by setting overflow hidden on body
+  //   document.body.style.overflow = 'hidden';
+
+  //   // Start the loading animation and set up transition to hide it
+  //   const loadingTimeout = setTimeout(() => {
+  //     setIsFading(true); // Start fade-out transition
+  //     setTimeout(() => {
+  //       setIsLoading(false); // Remove overlay after fade-out animation
+  //       document.body.style.overflow = ''; // Re-enable scrolling
+  //     }, 500); // Match this duration to the CSS transition duration
+  //   }, 2000); // Adjust to simulate loading duration
+
+  //   // Cleanup timeout on component unmount
+  //   return () => {
+  //     clearTimeout(loadingTimeout);
+  //     document.body.style.overflow = ''; // Re-enable scrolling on cleanup
+  //   };
+  // }, []);
+  // Read the saved state from localStorage or set default
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(
+    () => localStorage.getItem("isDarkMode") === "true" // Load initial state from localStorage
+  );
+
+  // Save the state to localStorage and toggle mode class
   useEffect(() => {
-    // Disable scrolling by setting overflow hidden on body
-    document.body.style.overflow = 'hidden';
+    localStorage.setItem("isDarkMode", String(isDarkMode));
+    document.body.classList.toggle("dark-mode", isDarkMode);
+  }, [isDarkMode]);
 
-    // Start the loading animation and set up transition to hide it
-    const loadingTimeout = setTimeout(() => {
-      setIsFading(true); // Start fade-out transition
-      setTimeout(() => {
-        setIsLoading(false); // Remove overlay after fade-out animation
-        document.body.style.overflow = ''; // Re-enable scrolling
-      }, 500); // Match this duration to the CSS transition duration
-    }, 2000); // Adjust to simulate loading duration
-
-    // Cleanup timeout on component unmount
-    return () => {
-      clearTimeout(loadingTimeout);
-      document.body.style.overflow = ''; // Re-enable scrolling on cleanup
-    };
-  }, []);
+  // Handle mode change with a refresh
+  const handleModeChange = (checked: boolean) => {
+    setIsDarkMode(checked);
+    setTimeout(() => window.location.reload(), 0); // Reload the page after state update
+  };
 
   // Scroll and cursor change handlers
   useEffect(() => {
@@ -50,10 +68,10 @@ export function SiteHeader() {
 
     const handleClick = () => {
       if (!isCursorChanged) {
-        document.body.style.cursor = 'url("/mouse/c.png"), pointer';
+        document.body.style.cursor = 'url("/mouse/bc.png"), pointer';
         setIsCursorChanged(true);
         setTimeout(() => {
-          document.body.style.cursor = 'url("/mouse/a.png"), pointer';
+          document.body.style.cursor = 'url("/mouse/ac.png"), pointer';
           setIsCursorChanged(false);
         }, 200);
       }
@@ -71,24 +89,29 @@ export function SiteHeader() {
   return (
     <>
       {/* Loading Overlay */}
-      {isLoading && (
+      {/* {isLoading && (
         <div className={`loading-overlay ${isFading ? 'fade-out' : ''}`}>
-          <img src="/art/animasi222.gif" alt="Loading animation" className="loading-animation" />
+          <img src="/background/dor.gif" alt="Loading animation" className="loading-animation" />
         </div>
-      )}
+      )} */}
 
       {/* Navbar */}
       <nav
-        className={`fixed w-full z-10 top-0 left-0 transition-all duration-300 ${
+        className={`z-20 fixed w-full top-0 left-0 transition-all duration-300 fade-in ${
           isNavbarVisible ? 'translate-y-0' : '-translate-y-full'
-        } ${!isScrolled && isMenuOpen ? 'bg-[#ff00ec] ' : ''} ${isScrolled && isMenuOpen ? 'bg-[#ff00ec] ' : ''} ${isScrolled && !isMenuOpen ? 'bg-[#ff00ec] ' : ''} `} 
+        } ${!isScrolled && isMenuOpen ? 'bg-[#008000] ' : ''} ${isScrolled && isMenuOpen ? 'bg-[#008000] ' : ''} ${isScrolled && !isMenuOpen ? 'bg-[#008000] ' : ''} `} 
       >
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="text-white text-xl font-bold flex text-center justify-center items-center">
             <img src="/iconp.webp" height={50} width={50} alt="" />
             <h2>$PEOW</h2>
           </div>
-
+          <span className="text-white">{isDarkMode ? "Anime" : "Mangga"} <Switch
+          checked={isDarkMode}
+          onCheckedChange={handleModeChange}
+          className="bg-gray-700 fire"
+        /></span>
+        
           <div className="hidden md:flex space-x-6">
             <a href="#home" className="text-white hover:text-gray-300 lg:text-3xl md:text-xl">HOME</a>
             <a href="#buy" className="text-white hover:text-gray-300 lg:text-3xl md:text-xl">BUY $PEOW</a>
@@ -102,14 +125,14 @@ export function SiteHeader() {
             className="md:hidden text-white focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 p-1 bg-[#ff00ec] hover:bg-[#b43ab2] rounded-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 p-1 bg-[#008000] hover:bg-[#00FF00] rounded-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
 
           {isMenuOpen && (
             <div
-              className={`md:hidden absolute top-16 left-0 w-full bg-[#ff00ec] shadow-lg p-4 space-y-4 transition-all duration-300 ${
+              className={`md:hidden absolute top-16 left-0 w-full bg-[#008000] shadow-lg p-4 space-y-4 transition-all duration-300 ${
                 isNavbarVisible ? 'translate-y-0' : '-translate-y-full'
               }`}
             >
