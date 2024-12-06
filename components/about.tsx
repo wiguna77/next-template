@@ -138,13 +138,13 @@ export function AboutSection() {
           <div className="space-y-4 border border-white bg-black bg-opacity-50 p-6 rounded-lg">
             <h3 className="text-2xl font-semibold text-white">Quote 1</h3>
             <p className="text-gray-300 italic">
-              "The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt
+              The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt
             </p>
           </div>
           <div className="space-y-4 border border-white bg-black bg-opacity-50 p-6 rounded-lg">
             <h3 className="text-2xl font-semibold text-white">Quote 2</h3>
             <p className="text-gray-300 italic">
-              "Success is not the key to happiness. Happiness is the key to success." - Albert Schweitzer
+              Success is not the key to happiness. Happiness is the key to success. - Albert Schweitzer
             </p>
           </div>
           <div className="flex justify-center border border-white bg-black bg-opacity-50 rounded-lg">

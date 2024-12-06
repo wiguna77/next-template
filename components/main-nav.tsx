@@ -27,7 +27,7 @@ export default function MainNav() {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         {/* Icon: you can use any icon component here */}
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M3 12h18M3 6h18M3 18h18" />
         </svg>
       </button>
