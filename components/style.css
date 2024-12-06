@@ -3,7 +3,7 @@ html{
 }
 @font-face {
   font-family: 'MyCustomFont';
-  src: url('../public/font/HowToDoSomething-7pKl.ttf') format('truetype');
+  src: url('../public/font/Anime Inept.otf') format('truetype');
 }
 /* Pulsing Effect for Fullscreen Image */
 .pulsing-effect {
@@ -111,7 +111,7 @@ a {
   }
   
   .fade-in3 {
-    animation: fadeInFromTop2 1s ease-out 5s forwards;
+    animation: fadeInFromTop2 1s ease-out 2s forwards;
   }
   .fade-in {
     animation: fadeInFromTop 1s ease-out;

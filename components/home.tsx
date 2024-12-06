@@ -8,19 +8,32 @@ export function HomeSection() {
     const [showDorGif, setShowDorGif] = useState(false);
     const [showSecGif, setShowSecGif] = useState(false);
     const [contentVisible, setContentVisible] = useState(false);
-      // Read the saved state from localStorage or set default
-    const [isDarkMode, setIsDarkMode] = useState<boolean>(
-        () => localStorage.getItem("isDarkMode") === "true" // LocalStorage stores as string
-    );
-
-    // Save the state to localStorage whenever it changes
+    const getCookie = (name: string) => {
+      if (typeof document !== 'undefined') {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop()?.split(';').shift();
+      }
+      return undefined;
+    };
+  
+    const initialDarkMode = getCookie("isDarkMode") === "true"; // Read cookie and set initial state
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(initialDarkMode);
+  
     useEffect(() => {
-        localStorage.setItem("isDarkMode", String(isDarkMode));
-        document.body.classList.toggle("dark-mode", isDarkMode); // Optionally add a dark-mode class
-    }, [isDarkMode]);
-    useEffect(() => {
-      document.body.style.overflow = showImage ? "hidden" : "auto";
-    }, [showImage]);
+      // Set the "isDarkMode" cookie and apply the dark mode class
+      const setCookie = (name: string, value: string, days: number) => {
+        if (typeof document !== 'undefined') {
+          const date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Expiry in days
+          document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+        }
+      };
+  
+      // Update the cookie whenever the mode changes
+      setCookie("isDarkMode", String(isDarkMode), 7); // Save for 7 days
+      document.body.classList.toggle("dark-mode", isDarkMode);
+    }, [isDarkMode]); // Re-run when the dark mode state changes
      // Preload the secondary image to optimize its load time
 
     const handleClick = () => {
@@ -75,19 +88,26 @@ export function HomeSection() {
       {contentVisible && (
         <main className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 fade-in z-10">
           {/* Title */}
-          <h1 className="text-6xl font-bold mb-4">$PEOW Token</h1>
-          <h2 className="text-4xl font-semibold mb-8">BUY NOW</h2>
+          {/* <h1 className="text-6xl font-bold mb-4">$PEOW Token</h1>
+          <h2 className="text-4xl font-semibold mb-8">BUY NOW</h2> */}
 
           {/* Desktop Buttons */}
-          <div className="hidden md:flex space-x-4">
+          {/* <div className="hidden md:flex space-x-4">
             <button className="bg-[#3afa6f] hover:bg-[#00FF00] text-white font-bold py-2 px-6 rounded-lg">
               BUY NOW <span>💰</span>
             </button>
             <button className="bg-[#3afa6f] hover:bg-[#00FF00] text-white font-bold py-2 px-6 rounded-lg">
               CHART 📊
             </button>
-          </div>
-
+          </div> */}
+                      <button className="fixed bottom-16 right-4 bg-[#3afa6f] hover:bg-[#00FF00] text-white font-bold py-2 px-6 rounded-lg w-100 h-10 shadow-lg">
+              BUY NOW <span>💰</span>
+            </button>
+      <button
+    className="fixed bottom-4 right-4 bg-[#3afa6f] hover:bg-[#00FF00] text-white font-bold py-2 px-6 rounded-lg w-100 h-10 shadow-lg"
+        >
+        CHART 📊
+        </button>
           {/* Mobile Buttons */}
           <div className="flex flex-col space-y-4 mt-6 md:hidden text-2xl">
             <h3 className="text-2xl font-bold underline">Useful Links:</h3>

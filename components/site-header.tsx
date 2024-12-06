@@ -34,18 +34,33 @@ export function SiteHeader() {
   //   };
   // }, []);
   // Read the saved state from localStorage or set default
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(
-    () => localStorage.getItem("isDarkMode") === "true" // Load initial state from localStorage
-  );
+  const getCookie = (name: string) => {
+    if (typeof document !== 'undefined') {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift();
+    }
+    return undefined;
+  };
 
+  const initialDarkMode = getCookie("isDarkMode") === "true"; // Read cookie and set initial state
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(initialDarkMode);
 
-
-  // Save the state to localStorage and toggle mode class
   useEffect(() => {
-    localStorage.setItem("isDarkMode", String(isDarkMode));
-    document.body.classList.toggle("dark-mode", isDarkMode);
-  }, [isDarkMode]);
+    // Set the "isDarkMode" cookie and apply the dark mode class
+    const setCookie = (name: string, value: string, days: number) => {
+      if (typeof document !== 'undefined') {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Expiry in days
+        document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+      }
+    };
 
+    // Update the cookie whenever the mode changes
+    setCookie("isDarkMode", String(isDarkMode), 7); // Save for 7 days
+    document.body.classList.toggle("dark-mode", isDarkMode);
+  }, [isDarkMode]); // Re-run when the dark mode state changes
+  
   // Handle mode change with a refresh
   const handleModeChange = (checked: boolean) => {
     setIsDarkMode(checked);
@@ -109,7 +124,7 @@ export function SiteHeader() {
             <img src="/iconp.webp" height={50} width={50} alt="" />
             <h2>$PEOW</h2>
           </div>
-          <span className="text-white">{isDarkMode ? "Anime" : "Manga"} <Switch
+          <span className="text-white lg:text-2xl md:text-md">{isDarkMode ? "Anime" : "Manga"} <Switch
           checked={isDarkMode}
           onCheckedChange={handleModeChange}
           className="bg-gray-700 fire"
@@ -149,6 +164,8 @@ export function SiteHeader() {
           )}
         </div>
       </nav>
+
+
     </>
   );
 }
